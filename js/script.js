@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.height = window.innerHeight;
 
         let particlesArray = [];
-        const colors = ['#00F0FF', '#b026ff', '#ffffff'];
+        const colors = ['#ffffff', '#aaaaaa', '#555555'];
 
         class Particle {
             constructor() {

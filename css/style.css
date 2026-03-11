@@ -2,19 +2,19 @@
    CSS Variables & Typography
    ========================================================================== */
 :root {
-    /* Color Palette - Cyberpunk / Futuristic Theme */
-    --bg-dark: #070714;
-    --bg-darker: #03030b;
-    --neon-blue: #00F0FF;
-    --neon-purple: #b026ff;
-    --neon-pink: #FF00E6;
-    --text-main: #E2E8F0;
-    --text-muted: #94A3B8;
+    /* Color Palette - Monochrome / Futuristic Theme */
+    --bg-dark: #000000;
+    --bg-darker: #080808;
+    --neon-blue: #ffffff;
+    --neon-purple: #aaaaaa;
+    --neon-pink: #cccccc;
+    --text-main: #ffffff;
+    --text-muted: #888888;
     
     /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-highlight: rgba(0, 240, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-highlight: rgba(255, 255, 255, 0.2);
     
     /* Variables - Fonts */
     --font-heading: 'Orbitron', sans-serif;
