@@ -151,92 +151,94 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 6. Particle Background (Hero Section) ---
+    // --- 6. Animated Wave Grid Background (Hero Section) ---
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        let particlesArray = [];
-        const colors = ['#ffffff', '#aaaaaa', '#555555'];
+        let time = 0;
+        
+        function drawGridWave() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Grid Properties
+            const cols = 20;
+            const rows = 15;
+            const spacingX = canvas.width / cols;
+            const spacingY = canvas.height / rows;
+            
+            // Flowing Wave Parameters
+            const frequencyX = 0.05;
+            const frequencyY = 0.05;
+            const amplitude = 30;
+            const speed = 0.02;
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.glow = Math.random() * 5 + 2;
-            }
+            ctx.lineWidth = 1;
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-            }
-
-            draw() {
+            // Draw horizontal lines
+            for (let y = 0; y <= rows; y++) {
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = this.glow;
-                ctx.shadowColor = this.color;
-                ctx.fill();
-                
-                // Reset shadow after drawing so it doesn't affect lines
-                ctx.shadowBlur = 0; 
-            }
-        }
+                for (let x = 0; x <= cols; x++) {
+                    const posX = x * spacingX;
+                    const posY = y * spacingY;
+                    
+                    // Wave distortion
+                    const waveY = Math.sin(posX * frequencyX + time) * amplitude;
+                    const waveX = Math.cos(posY * frequencyY + time) * amplitude;
 
-        function initParticles() {
-            particlesArray = [];
-            const numberOfParticles = (canvas.width * canvas.height) / 15000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
+                    const finalX = posX + waveX;
+                    const finalY = posY + waveY;
 
-        function connectParticles() {
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let dx = particlesArray[a].x - particlesArray[b].x;
-                    let dy = particlesArray[a].y - particlesArray[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 100) {
-                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 - distance/1000})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
+                    if (x === 0) {
+                        ctx.moveTo(finalX, finalY);
+                    } else {
+                        ctx.lineTo(finalX, finalY);
                     }
                 }
+                
+                // Opacity based on height (fade out lower down)
+                const alpha = 1 - (y/rows);
+                ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.15})`;
+                ctx.stroke();
             }
+
+            // Draw vertical lines
+            for (let x = 0; x <= cols; x++) {
+                ctx.beginPath();
+                for (let y = 0; y <= rows; y++) {
+                    const posX = x * spacingX;
+                    const posY = y * spacingY;
+                    
+                    // Wave distortion
+                    const waveY = Math.sin(posX * frequencyX + time) * amplitude;
+                    const waveX = Math.cos(posY * frequencyY + time) * amplitude;
+
+                    const finalX = posX + waveX;
+                    const finalY = posY + waveY;
+
+                    if (y === 0) {
+                        ctx.moveTo(finalX, finalY);
+                    } else {
+                        ctx.lineTo(finalX, finalY);
+                    }
+                }
+                
+                const alpha = Math.sin((x/cols) * Math.PI); // Stronger in middle
+                ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.15})`;
+                ctx.stroke();
+            }
+
+            time += speed;
+            requestAnimationFrame(drawGridWave);
         }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            connectParticles();
-            requestAnimationFrame(animateParticles);
-        }
-
-        initParticles();
-        animateParticles();
+        drawGridWave();
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles();
         });
     }
 
