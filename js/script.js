@@ -151,94 +151,122 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 6. Animated Wave Grid Background (Hero Section) ---
+    // --- 6. Interactive Constellation Background (Hero Section) ---
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        let time = 0;
+        let particlesArray = [];
         
-        function drawGridWave() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Grid Properties
-            const cols = 20;
-            const rows = 15;
-            const spacingX = canvas.width / cols;
-            const spacingY = canvas.height / rows;
-            
-            // Flowing Wave Parameters
-            const frequencyX = 0.05;
-            const frequencyY = 0.05;
-            const amplitude = 30;
-            const speed = 0.02;
+        // Mouse Object to interact with particles
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 120 // Interaction distance
+        };
 
-            ctx.lineWidth = 1;
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
 
-            // Draw horizontal lines
-            for (let y = 0; y <= rows; y++) {
-                ctx.beginPath();
-                for (let x = 0; x <= cols; x++) {
-                    const posX = x * spacingX;
-                    const posY = y * spacingY;
-                    
-                    // Wave distortion
-                    const waveY = Math.sin(posX * frequencyX + time) * amplitude;
-                    const waveX = Math.cos(posY * frequencyY + time) * amplitude;
-
-                    const finalX = posX + waveX;
-                    const finalY = posY + waveY;
-
-                    if (x === 0) {
-                        ctx.moveTo(finalX, finalY);
-                    } else {
-                        ctx.lineTo(finalX, finalY);
-                    }
-                }
-                
-                // Opacity based on height (fade out lower down)
-                const alpha = 1 - (y/rows);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.15})`;
-                ctx.stroke();
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                // Move slowly
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = (Math.random() - 0.5) * 1.5;
+                // Varying sizes
+                this.size = Math.random() * 3 + 1;
             }
 
-            // Draw vertical lines
-            for (let x = 0; x <= cols; x++) {
-                ctx.beginPath();
-                for (let y = 0; y <= rows; y++) {
-                    const posX = x * spacingX;
-                    const posY = y * spacingY;
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+
+                // Collision with mouse
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    // Push particles away slightly
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    const directionX = forceDirectionX * force * 2;
+                    const directionY = forceDirectionY * force * 2;
                     
-                    // Wave distortion
-                    const waveY = Math.sin(posX * frequencyX + time) * amplitude;
-                    const waveX = Math.cos(posY * frequencyY + time) * amplitude;
-
-                    const finalX = posX + waveX;
-                    const finalY = posY + waveY;
-
-                    if (y === 0) {
-                        ctx.moveTo(finalX, finalY);
-                    } else {
-                        ctx.lineTo(finalX, finalY);
-                    }
+                    this.x -= directionX;
+                    this.y -= directionY;
                 }
-                
-                const alpha = Math.sin((x/cols) * Math.PI); // Stronger in middle
-                ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.15})`;
-                ctx.stroke();
             }
 
-            time += speed;
-            requestAnimationFrame(drawGridWave);
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.fill();
+            }
         }
 
-        drawGridWave();
+        function initParticles() {
+            particlesArray = [];
+            // Amount of dots changes depending on screen size
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) 
+                                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        let alpha = 1 - (distance / 20000);
+                        if(alpha < 0) alpha = 0;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            initParticles();
+        });
+        
+        window.addEventListener('mouseout', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
         });
     }
 
