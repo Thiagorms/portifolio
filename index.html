@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Desenvolvedor Front-End</title>
+    <meta name="description"
+        content="Portfólio profissional de desenvolvimento front-end focado em JavaScript, HTML e CSS.">
+
+    <!-- Google Fonts: Orbitron & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-circle"></div>
+        <span class="loader-text">INICIALIZANDO_SISTEMA...</span>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <a href="#home" class="logo text-neon">&lt;Dev/&gt;</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Início</a></li>
+                    <li><a href="#about" class="nav-link">Sobre Mim</a></li>
+                    <li><a href="#skills" class="nav-link">Tecnologias</a></li>
+                    <li><a href="#projects" class="nav-link">Projetos</a></li>
+                    <li><a href="#contact" class="nav-link">Contato</a></li>
+                </ul>
+                <div class="theme-toggle" id="theme-btn">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Canvas for Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <main>
+        <!-- Home / Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
+                <p class="greeting">Olá, ambiente virtual. Eu sou</p>
+                <h1 class="name glow-text">Thiago Ramos</h1> <!-- Fake name for placeholder -->
+                <h2 class="title">
+                    <span class="typed-text"></span><span class="cursor-blink">&nbsp;</span>
+                </h2>
+                <p class="description">
+                    Especialista em criar experiências web interativas, unindo design moderno com código limpo em
+                    JavaScript, HTML e CSS.
+                </p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn btn-primary">
+                        <span class="btn-text">Ver Projetos</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="#about" class="btn btn-secondary">Sobre Mim</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about section-padding">
+            <div class="container">
+                <h2 class="section-title text-neon" data-aos="fade-right">01. Sobre Mim</h2>
+                <div class="about-content">
+                    <div class="about-text" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Minha Jornada</h3>
+                        <p>Sou um desenvolvedor front-end apaixonado por tecnologia e ficção científica. Minha missão é
+                            construir interfaces na web que não apenas funcionem perfeitamente, mas que surpreendam
+                            visualmente o usuário.</p>
+                        <p>Com domínio das tecnologias web fundamentais, busco sempre a inovação através de animações
+                            assíncronas, arquitetura escalável e design system consistente.</p>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-number">3+</span>
+                                <span class="stat-label">Anos de Exp.</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Projetos Feitos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image glass-panel" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="image-wrapper">
+                            <!-- Placeholder avatar -->
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user-astronaut"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills section-padding">
+            <div class="container">
+                <h2 class="section-title text-neon" data-aos="fade-right">02. Tecnologias</h2>
+                <div class="skills-grid">
+
+                    <div class="skill-card glass-panel html-card" data-aos="flip-up" data-aos-delay="100">
+                        <i class="fab fa-html5 skill-icon"></i>
+                        <h3>HTML5</h3>
+                        <p>Semântica e Acessibilidade</p>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar" style="width: 95%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card glass-panel css-card" data-aos="flip-up" data-aos-delay="200">
+                        <i class="fab fa-css3-alt skill-icon"></i>
+                        <h3>CSS3</h3>
+                        <p>Animações, Grid & Flexbox</p>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card glass-panel js-card" data-aos="flip-up" data-aos-delay="300">
+                        <i class="fab fa-js skill-icon"></i>
+                        <h3>JavaScript</h3>
+                        <p>ES6+, DOM, APIs & Lógica</p>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card glass-panel tools-card" data-aos="flip-up" data-aos-delay="400">
+                        <i class="fas fa-terminal skill-icon"></i>
+                        <h3>Ferramentas</h3>
+                        <p>Git, VS Code, webpack, Vite</p>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects section-padding">
+            <div class="container">
+                <h2 class="section-title text-neon" data-aos="fade-right">03. Projetos</h2>
+                <div class="projects-filter" data-aos="fade-up">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="js">JavaScript</button>
+                    <button class="filter-btn" data-filter="css">HTML/CSS</button>
+                </div>
+
+                <div class="projects-grid">
+
+                    <!-- Project 1 -->
+                    <div class="project-card glass-panel" data-category="js" data-aos="zoom-in-up" data-aos-delay="100">
+                        <div class="project-img">
+                            <div class="img-placeholder bg-gradient-1">Cyber T-Rex App</div>
+                            <div class="project-links-overlay">
+                                <a href="#" class="overlay-link"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="overlay-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span>JavaScript</span>
+                                <span>Canvas API</span>
+                            </div>
+                            <h3>Clone T-Rex IA</h3>
+                            <p>Um jogo interativo construído em puro JS focado em manipulação do DOM e Canvas de alta
+                                performance.</p>
+                            <div class="project-actions">
+                                <a href="#" class="btn btn-sm btn-outline">Ver Demo</a>
+                                <a href="#" class="btn btn-sm btn-icon"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card glass-panel" data-category="css" data-aos="zoom-in-up"
+                        data-aos-delay="200">
+                        <div class="project-img">
+                            <div class="img-placeholder bg-gradient-2">Neon Dashboard</div>
+                            <div class="project-links-overlay">
+                                <a href="#" class="overlay-link"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="overlay-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS Grid</span>
+                            </div>
+                            <h3>Painel Analytics Neon</h3>
+                            <p>Interface responsiva para dashboard utilizando CSS moderno, grid layouts complexos e UI
+                                Glassmorphism.</p>
+                            <div class="project-actions">
+                                <a href="#" class="btn btn-sm btn-outline">Ver Demo</a>
+                                <a href="#" class="btn btn-sm btn-icon"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card glass-panel" data-category="js" data-aos="zoom-in-up" data-aos-delay="300">
+                        <div class="project-img">
+                            <div class="img-placeholder bg-gradient-3">Data Visualizer</div>
+                            <div class="project-links-overlay">
+                                <a href="#" class="overlay-link"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="overlay-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span>JS ES6</span>
+                                <span>Fetch API</span>
+                            </div>
+                            <h3>Crypto Tracker Real-time</h3>
+                            <p>Aplicação web para acompanhamento de criptomoedas em tempo real consumindo APIs REST
+                                públicas.</p>
+                            <div class="project-actions">
+                                <a href="#" class="btn btn-sm btn-outline">Ver Demo</a>
+                                <a href="#" class="btn btn-sm btn-icon"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section-padding">
+            <div class="container">
+                <h2 class="section-title text-neon" data-aos="fade-right">04. Contato</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info glass-panel" data-aos="fade-right" data-aos-delay="100">
+                        <h3>Iniciar Transmissão</h3>
+                        <p>Atualmente estou aberto a novas oportunidades e desafios. Seja para uma vaga, um projeto ou
+                            apenas um "olá", fique à vontade para me enviar uma mensagem.</p>
+
+                        <div class="contact-methods">
+                            <a href="mailto:email@exemplo.com" class="contact-method">
+                                <i class="fas fa-envelope"></i>
+                                <span>email@exemplo.com</span>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="contact-method">
+                                <i class="fab fa-linkedin"></i>
+                                <span>/in/devprofile</span>
+                            </a>
+                            <a href="https://github.com" target="_blank" class="contact-method">
+                                <i class="fab fa-github-alt"></i>
+                                <span>@devprofile</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <form class="contact-form glass-panel" data-aos="fade-left" data-aos-delay="300">
+                        <div class="form-group">
+                            <input type="text" id="name" required placeholder="Seu Nome">
+                            <label for="name">Nome / ID</label>
+                            <div class="input-glow"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" required placeholder="Seu E-mail">
+                            <label for="email">Canal de Retorno (E-mail)</label>
+                            <div class="input-glow"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="5" required placeholder="Sua Mensagem"></textarea>
+                            <label for="message">Pacote de Dados (Mensagem)</label>
+                            <div class="input-glow"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            <span class="btn-text">Transmitir Mensagem</span>
+                            <i class="fas fa-paper-plane"></i>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Desenvolvido com <span class="heart"><i class="fas fa-bolt"></i></span> por Dev. Todos os
+                direitos reservados.</p>
+            <div class="social-links-footer">
+                <a href="#"><i class="fab fa-codepen"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- AOS for Scroll Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
