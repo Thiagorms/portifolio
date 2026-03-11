@@ -97,14 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.background = 'rgba(7, 7, 20, 0.9)';
-            header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.5)';
-        } else {
-            header.style.background = 'rgba(7, 7, 20, 0.7)';
-            header.style.boxShadow = 'none';
-        }
-
         // Active link highlight based on scroll
         let current = '';
         const sections = document.querySelectorAll('section');
