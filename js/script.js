@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.fillStyle = 'rgba(255, 0, 50, 0.8)'; // Neon Red
                 ctx.fill();
             }
         }
@@ -234,8 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (distance < (canvas.width / 7) * (canvas.height / 7)) {
                         let alpha = 1 - (distance / 20000);
                         if(alpha < 0) alpha = 0;
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(255, 0, 50, ${alpha * 0.6})`;
+                        ctx.lineWidth = 1.5;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                         ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
