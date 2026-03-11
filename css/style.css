@@ -300,6 +300,8 @@ ul {
     width: 100%;
     height: var(--nav-height);
     background: #000000;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
     z-index: 1000;
     display: flex;
