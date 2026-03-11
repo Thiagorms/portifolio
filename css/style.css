@@ -299,9 +299,7 @@ ul {
     left: 0;
     width: 100%;
     height: var(--nav-height);
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: #000000;
     border-bottom: 1px solid var(--glass-border);
     z-index: 1000;
     display: flex;
