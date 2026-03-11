@@ -97,12 +97,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     window.addEventListener('scroll', () => {
+        const canvas = document.getElementById('particle-canvas');
         if (window.scrollY > 50) {
             header.style.background = 'rgba(0, 0, 0, 0.8)'; // Transparent Black
             header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.5)';
+            if (canvas) canvas.style.opacity = '0.3'; // Faz as animações ficarem semi-transparentes
         } else {
             header.style.background = '#000000'; // Solid Black at top
             header.style.boxShadow = 'none';
+            if (canvas) canvas.style.opacity = '1'; // Animações normais no topo
         }
 
         // Active link highlight based on scroll
